@@ -1,0 +1,32 @@
+{
+    "name": "jlcd/api-cielo3.0-laravel",
+    "description": "Laravel Provider for Cielo's 3.0 API",
+    "type": "library",
+    "require": {
+        "jlcd/api-cielo3.0": "^0.1"
+    },
+    "keywords": [
+        "api",
+        "cielo",
+        "laravel",
+        "lumen"
+    ],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "João Drummond",
+            "email": "jldrummond@gmail.com"
+        },
+        {
+            "name": "Bruno Ferreira",
+            "email": "brunogonncalves@icloud.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "jlcd\\CieloLaravel\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
