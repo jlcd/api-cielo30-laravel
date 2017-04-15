@@ -1,5 +1,5 @@
 {
-    "name": "jlcd/api-cielo3.0-laravel",
+    "name": "jlcd/api-cielo30-laravel",
     "description": "Laravel Provider for Cielo's 3.0 API",
     "type": "library",
     "require": {
