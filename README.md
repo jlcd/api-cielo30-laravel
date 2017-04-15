@@ -1,16 +1,16 @@
-# Provider Laravel para API Cielo 3.0 (Client [jlcd/api-cielo3.0](https://github.com/jlcd/api-cielo3.0))
+# Provider Laravel para API Cielo 3.0 (Client [jlcd/api-cielo30](https://github.com/jlcd/api-cielo30))
 
 ## Descrição
 
-Este provider utiliza o client [jlcd/api-cielo3.0](https://github.com/jlcd/api-cielo3.0), que por sua vez utiliza o [sdk oficial](https://github.com/DeveloperCielo/API-3.0-PHP) da Cielo.
+Este provider utiliza o client [jlcd/api-cielo30](https://github.com/jlcd/api-cielo30), que por sua vez utiliza o [sdk oficial](https://github.com/DeveloperCielo/API-3.0-PHP) da Cielo.
 
-Qualquer issue referente à comunicação com a Cielo deverá ser tratado diretamente nos [issues](https://github.com/jlcd/api-cielo3.0/issues) do client.
+Qualquer issue referente à comunicação com a Cielo deverá ser tratado diretamente nos [issues](https://github.com/jlcd/api-cielo30/issues) do client.
 
 Versões do Laravel anteriores à `5.0` não foram testadas e o funcionamento não é garantido.
 
 ## Instalação
 
-Via Composer: `composer require jlcd/api-cielo3.0-laravel`
+Via Composer: `composer require jlcd/api-cielo30-laravel`
 
 Incluir o código abaixo na posição `providers` no arquivo `boostrap/app.php`
 ```php
@@ -145,4 +145,4 @@ Route::get('/paymenttoken/{id}', function ($id) {
 
 ---
 
-Para maiores detalhes vide repositório do client utilizado ([jlcd/api-cielo3.0](https://github.com/jlcd/api-cielo3.0)) e a [documentação oficial](https://developercielo.github.io/Webservice-3.0/).
+Para maiores detalhes vide repositório do client utilizado ([jlcd/api-cielo30](https://github.com/jlcd/api-cielo30)) e a [documentação oficial](https://developercielo.github.io/Webservice-3.0/).
