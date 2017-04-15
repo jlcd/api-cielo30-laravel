@@ -3,7 +3,7 @@
     "description": "Laravel Provider for Cielo's 3.0 API",
     "type": "library",
     "require": {
-        "jlcd/api-cielo3.0": "^0.1"
+        "jlcd/api-cielo30": "^0.1"
     },
     "keywords": [
         "api",
