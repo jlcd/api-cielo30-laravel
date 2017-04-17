@@ -1,16 +1,18 @@
-# Provider Laravel para API Cielo 3.0 (Client [jlcd/api-cielo3.0](https://github.com/jlcd/api-cielo3.0))
+# Provider Laravel para API Cielo 3.0 (Client [jlcd/api-cielo30](https://github.com/jlcd/api-cielo30))
 
 ## Descrição
 
-Este provider utiliza o client [jlcd/api-cielo3.0](https://github.com/jlcd/api-cielo3.0), que por sua vez utiliza o [sdk oficial](https://github.com/DeveloperCielo/API-3.0-PHP) da Cielo.
+Este provider utiliza o client [jlcd/api-cielo30](https://github.com/jlcd/api-cielo30), que por sua vez utiliza o [sdk oficial](https://github.com/DeveloperCielo/API-3.0-PHP) da Cielo.
 
-Qualquer issue referente à comunicação com a Cielo deverá ser tratado diretamente nos [issues](https://github.com/jlcd/api-cielo3.0/issues) do client.
+Qualquer issue referente à comunicação com a Cielo deverá ser tratado diretamente nos [issues](https://github.com/jlcd/api-cielo30/issues) do client.
 
 Versões do Laravel anteriores à `5.0` não foram testadas e o funcionamento não é garantido.
 
 ## Instalação
 
-Via Composer: `composer require jlcd/api-cielo3.0-laravel`
+Via Composer: `composer require jlcd/api-cielo30-laravel`
+
+### Laravel
 
 Incluir o código abaixo na posição `providers` no arquivo `boostrap/app.php`
 ```php
@@ -36,6 +38,34 @@ Incluir o código abaixo na posição `providers` no arquivo `boostrap/app.php`
 
 Executar `php artisan vendor:publish` no projeto.
 
+### Lumen
+
+Criar o arquivo `config/cielo.php`:
+
+```php
+<?php
+
+return [
+
+    'merchant_id'  => env('CIELO_ID', 'default_id'),
+    'merchant_key' => env('CIELO_KEY', 'default_key'),
+    'environment'  => env('CIELO_ENV', 'default_environment'), // production | sandbox
+
+];
+
+```
+
+Incluir o código abaixo em `bootstrap/app.php`:
+
+```php
+(...)
+
+$app->configure('cielo');
+$app->register(jlcd\CieloLaravel\CieloServiceProvider::class);
+
+(...)
+```
+
 ## Configuração
 
 As variáveis de ambiente `CIELO_ID`, `CIELO_KEY` e `CIELO_ENV` deverão ser configuradas no arquivo `.env`.
@@ -58,6 +88,8 @@ Como alternativa, após `vendor:publish`, as configurações poderão ser inclu�
 ## Utilização
 
 Exemplo utilizando o arquivo `routes/web.php`:
+
+### Realizar pagamento
 
 ```php
 <?php
@@ -88,6 +120,14 @@ Route::get('/', function () {
     $payment = app()->cielo->payment($payment, $order, $customer);
     dd($payment);
 });
+```
+
+### Cancelar pagamento
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloPayment;
 
 Route::get('/cancel/{id}', function ($id) {
     $payment = new CieloPayment();
@@ -97,7 +137,15 @@ Route::get('/cancel/{id}', function ($id) {
     $payment = app()->cielo->cancelPayment($payment);
     dd($payment);
 });
+```
 
+### Capturar pagamento
+
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloPayment;
 Route::get('/capture/{id}', function ($id) {
     $payment = new CieloPayment();
     $payment->setId($id);
@@ -106,6 +154,15 @@ Route::get('/capture/{id}', function ($id) {
     $payment = app()->cielo->capturePayment($payment);
     dd($payment);
 });
+```
+
+### Tokenizar Cartão
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloCreditCard;
+use jlcd\Cielo\Resources\CieloCustomer;
 
 Route::get('/tokenize', function () {
     $creditCard = new CieloCreditCard();
@@ -120,6 +177,17 @@ Route::get('/tokenize', function () {
     $token = app()->cielo->tokenizeCreditCard($creditCard, $customer);
     dd($token);
 });
+```
+
+### Realizar pagamento via Token de Cartão
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloPayment;
+use jlcd\Cielo\Resources\CieloCreditCard;
+use jlcd\Cielo\Resources\CieloCustomer;
+use jlcd\Cielo\Resources\CieloOrder;
 
 Route::get('/paymenttoken/{id}', function ($id) {
     $payment = new CieloPayment();
@@ -145,4 +213,4 @@ Route::get('/paymenttoken/{id}', function ($id) {
 
 ---
 
-Para maiores detalhes vide repositório do client utilizado ([jlcd/api-cielo3.0](https://github.com/jlcd/api-cielo3.0)) e a [documentação oficial](https://developercielo.github.io/Webservice-3.0/).
+Para maiores detalhes vide repositório do client utilizado ([jlcd/api-cielo30](https://github.com/jlcd/api-cielo30)) e a [documentação oficial](https://developercielo.github.io/Webservice-3.0/).
