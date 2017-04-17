@@ -12,6 +12,8 @@ Versões do Laravel anteriores à `5.0` não foram testadas e o funcionamento n�
 
 Via Composer: `composer require jlcd/api-cielo30-laravel`
 
+### Laravel
+
 Incluir o código abaixo na posição `providers` no arquivo `boostrap/app.php`
 ```php
 (...)
@@ -35,6 +37,34 @@ Incluir o código abaixo na posição `providers` no arquivo `boostrap/app.php`
 ```
 
 Executar `php artisan vendor:publish` no projeto.
+
+### Lumen
+
+Criar o arquivo `config/cielo.php`:
+
+```php
+<?php
+
+return [
+
+    'merchant_id'  => env('CIELO_ID', 'default_id'),
+    'merchant_key' => env('CIELO_KEY', 'default_key'),
+    'environment'  => env('CIELO_ENV', 'default_environment'), // production | sandbox
+
+];
+
+```
+
+Incluir o código abaixo em `bootstrap/app.php`:
+
+```php
+(...)
+
+$app->configure('cielo');
+$app->register(jlcd\CieloLaravel\CieloServiceProvider::class);
+
+(...)
+```
 
 ## Configuração
 
