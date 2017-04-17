@@ -59,6 +59,8 @@ Como alternativa, após `vendor:publish`, as configurações poderão ser inclu�
 
 Exemplo utilizando o arquivo `routes/web.php`:
 
+### Realizar pagamento
+
 ```php
 <?php
 
@@ -88,6 +90,14 @@ Route::get('/', function () {
     $payment = app()->cielo->payment($payment, $order, $customer);
     dd($payment);
 });
+```
+
+### Cancelar pagamento
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloPayment;
 
 Route::get('/cancel/{id}', function ($id) {
     $payment = new CieloPayment();
@@ -97,7 +107,15 @@ Route::get('/cancel/{id}', function ($id) {
     $payment = app()->cielo->cancelPayment($payment);
     dd($payment);
 });
+```
 
+### Capturar pagamento
+
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloPayment;
 Route::get('/capture/{id}', function ($id) {
     $payment = new CieloPayment();
     $payment->setId($id);
@@ -106,6 +124,15 @@ Route::get('/capture/{id}', function ($id) {
     $payment = app()->cielo->capturePayment($payment);
     dd($payment);
 });
+```
+
+### Tokenizar Cartão
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloCreditCard;
+use jlcd\Cielo\Resources\CieloCustomer;
 
 Route::get('/tokenize', function () {
     $creditCard = new CieloCreditCard();
@@ -120,6 +147,17 @@ Route::get('/tokenize', function () {
     $token = app()->cielo->tokenizeCreditCard($creditCard, $customer);
     dd($token);
 });
+```
+
+### Realizar pagamento via Token de Cartão
+
+```php
+<?php
+
+use jlcd\Cielo\Resources\CieloPayment;
+use jlcd\Cielo\Resources\CieloCreditCard;
+use jlcd\Cielo\Resources\CieloCustomer;
+use jlcd\Cielo\Resources\CieloOrder;
 
 Route::get('/paymenttoken/{id}', function ($id) {
     $payment = new CieloPayment();
