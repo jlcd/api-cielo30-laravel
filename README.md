@@ -14,7 +14,7 @@ Via Composer: `composer require jlcd/api-cielo30-laravel`
 
 ### Laravel
 
-Incluir o código abaixo na posição `providers` no arquivo `boostrap/app.php`
+Incluir o código abaixo na posição `providers` no arquivo `config/app.php`
 ```php
 (...)
 
